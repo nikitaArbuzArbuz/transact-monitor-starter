@@ -39,14 +39,29 @@ public class TransactMonitoringAspect {
           new TransactionSynchronization() {
             @Override
             public void afterCommit() {
-              long executeTime = System.currentTimeMillis() - startTime;
-              logger.info("Transaction {} commited in {} ms", methodName, executeTime);
+              try {
+                long executeTime = System.currentTimeMillis() - startTime;
+                logger.info("Transaction committed in {} ms, method {}", executeTime, methodName);
+              } catch (Exception e) {
+                logger.error("Error afterCommit for {}: {}", methodName, e.getMessage());
+              }
             }
 
             @Override
             public void afterCompletion(int status) {
-              if (status == STATUS_ROLLED_BACK) {
-                logger.warn("Transaction {} rolled back", methodName);
+              try {
+                long executeTime = System.currentTimeMillis() - startTime;
+                if (status == STATUS_ROLLED_BACK) {
+                  logger.warn(
+                      "Transaction rolled back in {} ms, method {}", executeTime, methodName);
+                } else {
+                  logger.warn(
+                      "Transaction completion status is unknown in {} ms, method {}",
+                      executeTime,
+                      methodName);
+                }
+              } catch (Exception e) {
+                logger.error("Error afterCompletion for {}: {}", methodName, e.getMessage());
               }
             }
           });

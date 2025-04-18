@@ -5,7 +5,7 @@
 ```xml
     <groupId>ru.vtb.transactmonitor</groupId>
     <artifactId>transact-monitor-starter</artifactId>
-    <version>1.0.4</version>
+    <version>1.1.9</version>
 ```
 2. Пропишите настройки в application.yaml
 ```yaml

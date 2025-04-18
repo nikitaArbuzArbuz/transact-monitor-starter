@@ -12,7 +12,7 @@
 
     <groupId>ru.vtb.transactmonitor</groupId>
     <artifactId>transact-monitor-starter</artifactId>
-    <version>1.0.4</version>
+    <version>1.1.9</version>
     <packaging>jar</packaging>
 
     <name>transact-monitor-starter</name>

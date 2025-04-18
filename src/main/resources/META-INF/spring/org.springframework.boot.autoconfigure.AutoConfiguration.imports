@@ -1,1 +1,2 @@
 ru.vtb.transactmonitor.configuration.TransactMonitoringAutoConfiguration
+ru.vtb.transactmonitor.configuration.BeanPostProcessorConfiguration
