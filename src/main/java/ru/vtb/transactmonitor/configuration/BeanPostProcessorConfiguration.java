@@ -7,10 +7,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
+import ru.vtb.transactmonitor.processor.PlatformTransactionManagerBeanPostProcessor;
 import ru.vtb.transactmonitor.processor.TransactionTemplateBeanPostProcessor;
 
 @AutoConfiguration
-@ConditionalOnClass(TransactionTemplate.class)
+@ConditionalOnClass({TransactionTemplate.class, PlatformTransactionManager.class})
 @ConditionalOnProperty(
     prefix = "transaction-monitoring",
     name = {"enabled"},
@@ -26,5 +27,10 @@ public class BeanPostProcessorConfiguration {
   @Bean
   public TransactionTemplateBeanPostProcessor transactionTemplateBeanPostProcessor() {
     return new TransactionTemplateBeanPostProcessor();
+  }
+
+  @Bean
+  public PlatformTransactionManagerBeanPostProcessor coordinatorBeanPostProcessor() {
+    return new PlatformTransactionManagerBeanPostProcessor();
   }
 }
